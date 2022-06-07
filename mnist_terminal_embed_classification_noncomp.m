@@ -16,18 +16,28 @@ MinDistLTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 runtimeTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 NonlinearityTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 SuccessRateTotal = zeros(size(M,2),size(N,2)); %Dummy variable
+epsilon = 0.1; %Choice of epsilon
+Tests = 1000; %Number of tests
 
 ncounter = 0;
 n = N;
 ncounter = ncounter +1;
-set = randi([1 60000],1,n); %Denotes the set of images taken for training data
-Set = setdiff(1:60000,set); %Denotes the set of images not used in training data
-Set = Set(randperm(length(Set))); %Randomizes the order of these images 
+for i = 0:9
+    ind = find(labels(:,1)==i);
+    ind = ind(randperm(length(ind)));
+    set((n/10)*i+1:(n/10)*(i+1)) = ind(1:n/10); %Denotes the set of images taken for training data
+end
+Labels = labels;
+Labels(set,:) = [];
+ for i = 0:9
+    ind = find(Labels(:,1)==i);
+    ind = ind(randperm(length(ind)));
+    Set((Tests/10)*i+1:(Tests/10)*(i+1)) = ind(1:Tests/10); %Denotes the set of images not used in training data
+end
 
 X = images(:,set); %Loads corresponding images
 d = size(X,1); %Size of images (number of pixels) 
-epsilon = 0.1; %Choice of epsilon
-Tests = 1000; %Number of tests
+
 
 Nonlinearity = zeros(Tests,4); %Dummy variable
 SuccessRate = zeros(Tests,1); %Dummy variable

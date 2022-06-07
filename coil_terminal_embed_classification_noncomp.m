@@ -17,22 +17,23 @@ BigOTotal = zeros(size(M,2),size(R,2)); %Dummy variable
 runtimeTotal = zeros(size(M,2),size(R,2)); %Dummy variable
 NonlinearityTotal = zeros(size(M,2),size(R,2)); %Dummy variable
 SuccessRateTotal = zeros(size(M,2),size(R,2)); %Dummy variable
+epsilon = 0.1; %Choice of epsilon
+Tests = 1000; %Number of tests
 
 
 r = R;
 rcounter = 1;
 set = 1:r:7199; %Denotes the set of images taken for training data
-Set = setdiff(1:7200,set); %Denotes the set of images not used in training data
-Set = Set(randperm(length(Set))); %Randomizes the order of these images 
+Labels = transpose(labels);
+Labels(set,:) = [];
+ for i = 1:100
+     ind = setdiff(1:72,set((i-1)*(72/r)+1:i*(72/r)));
+    Set((i-1)*(Tests/100)+1:i*(Tests/100)) = ind(1:(Tests/100)); %Denotes the set of images not used in training data
+end
 n = size(set,2); 
 X = images(:,set); %Loads corresponding images
 
 d = size(X,1); %Size of images (number of pixels) 
-
-epsilon = 0.1; %Choice of epsilon
-
-Tests = 1000; %Number of tests
-
 Nonlinearity = zeros(Tests,3); %Dummy variable
 SuccessRate = zeros(Tests,1); %Dummy variable
 Ident = zeros(Tests,1); %Dummy variable

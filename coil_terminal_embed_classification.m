@@ -43,8 +43,15 @@ ncounter = 0;
 for r = R
 ncounter = ncounter +1;
 set = 1:r:7199; %Denotes the set of images taken for training data
-Set = setdiff(1:7200,set); %Denotes the set of images not used in training data
-Set = Set(randperm(length(Set))); %Randomizes the order of these images 
+
+Labels = transpose(labels);
+Labels(set,:) = [];
+ for i = 1:100
+     ind = setdiff(1:72,set((i-1)*(72/r)+1:i*(72/r)));
+    Set((i-1)*(Tests/100)+1:i*(Tests/100)) = ind(1:(Tests/100)); %Denotes the set of images not used in training data
+end
+
+
 n = size(set,2); 
 X = images(:,set); %Loads corresponding images
 

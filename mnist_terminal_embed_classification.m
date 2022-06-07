@@ -36,9 +36,20 @@ Piall = (1/sqrt(m))*randn(m,Tests*d); %Random gaussian embedding
 ncounter = 0;
 for n = N
 ncounter = ncounter+1;
- set = randi([1 60000],1,n); %Denotes the set of images taken for training data
- Set = setdiff(1:60000,set); %Denotes the set of images not used in training data
- Set = Set(randperm(length(Set))); %Randomizes the order of these images 
+for i = 0:9
+    ind = find(labels(:,1)==i);
+    [i size(ind)]
+    ind = ind(randperm(length(ind)));
+    set((n/10)*i+1:(n/10)*(i+1)) = ind(1:n/10); %Denotes the set of images taken for training data
+end
+sin(PP)
+Labels = labels;
+Labels(set,:) = [];
+ for i = 0:9
+    ind = find(Labels(:,1)==i);
+    ind = ind(randperm(length(ind)));
+    Set((Tests/10)*i+1:(Tests/10)*(i+1)) = ind(1:Tests/10); %Denotes the set of images not used in training data
+end
 X = images(:,set(1:n)); %Loads corresponding images
 
 p = 0; %Start of correct classification counter
