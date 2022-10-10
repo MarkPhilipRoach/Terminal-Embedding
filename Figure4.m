@@ -127,13 +127,14 @@ end
 
 %% Write\Read Matrix
 
-% writematrix(SuccessRateTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\SuccessRateTotal.csv')
-% writematrix(MaxDistTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\MaxDistTotal.csv')
-% writematrix(MinDistTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\MinDistTotal.csv')
-% writematrix(MaxDistLTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\MaxDistLTotal.csv')
-% writematrix(MinDistLTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\MinDistLTotal.csv')
-% writematrix(NonlinearityTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\NonlinearityTotal.csv')
-% writematrix(runtimeTotal,'C:\Users\markp\Google Drive\MSU\Mathematics\PHD\Terminal Embdedding\Matlab\coil\Classification Data\runtimeTotal.csv')
+%Save or upload data
+writematrix(SuccessRateTotal,'Folderpath\SuccessRateTotal.csv')
+writematrix(MaxDistTotal,'Folderpath\MaxDistTotal.csv')
+writematrix(MinDistTotal,'Folderpath\MinDistTotal.csv')
+writematrix(MaxDistLTotal,'Folderpath\MaxDistLTotal.csv')
+writematrix(MinDistLTotal,'Folderpath\MinDistLTotal.csv')
+writematrix(NonlinearityTotal,'Folderpath\NonlinearityTotal.csv')
+writematrix(runtimeTotal,'Folderpath\runtimeTotal.csv')
 
 % SuccessRateTotal = load('SuccessRateTotal.csv');
 % MaxDistTotal = load('MaxDistTotal.csv');
@@ -143,8 +144,13 @@ end
 % NonlinearityTotal = load('NonlinearityTotal.csv');
 % runtimeTotal = load('runtimeTotal.csv');
 
-
 %% Plotting figures
+
+M = 8:1:15;
+R = [2 4 8];
+SuccessRateTotal = ones(size(M,2),size(R,2));
+
+
 %Figure 1: m vs Successful Classification Perentage
 % Create figure
 figure1 = figure;
@@ -158,7 +164,7 @@ xticks([M])
 plot1_1 = plot(M,SuccessRateTotal(:,1),'-r+','LineWidth',1.5,'Parent',axes1); hold on;
 plot1_2 = plot(M,SuccessRateTotal(:,2),'-go','LineWidth',1.5,'Parent',axes1); hold on;
 plot1_3 = plot(M,SuccessRateTotal(:,3),'-b*','LineWidth',1.5,'Parent',axes1); hold on;
-legend('n=4000','n=2000','n=1000')
+legend('n=3600','n=1800','n=900')
 
 % Create ylabel
 ylabel({'Successful Classification Perentage'});
@@ -190,7 +196,7 @@ plot2_1 = plot(M,runtimeTotal(:,1),'-r+','LineWidth',1.5,'Parent',axes2); hold o
 plot2_2 = plot(M,runtimeTotal(:,2),'-go','LineWidth',1.5,'Parent',axes2); hold on;
 plot2_3 = plot(M,runtimeTotal(:,3),'-b*','LineWidth',1.5,'Parent',axes2); hold on;
 
-legend('n=4000','n=2000','n=1000')
+legend('n=3600','n=1800','n=900')
 
 % Create ylabel
 ylabel({'Runtime (in seconds)'});
@@ -256,7 +262,7 @@ plot4_1_1 = plot(M,NonlinearityTotal(:,1),'-r+','LineWidth',1.5,'Parent',axes4);
 plot4_1_2 = plot(M,NonlinearityTotal(:,2),'-go','LineWidth',1.5,'Parent',axes4); hold on;
 plot4_1_3 = plot(M,NonlinearityTotal(:,3),'-b*','LineWidth',1.5,'Parent',axes4); hold on;
 
-legend('n=4000','n=2000','n=1000')
+legend('n=3600','n=1800','n=900')
 % Create ylabel
 ylabel({'Nonlinearity'});
 
