@@ -17,23 +17,25 @@ runtimeTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 NonlinearityTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 SuccessRateTotal = zeros(size(M,2),size(N,2)); %Dummy variable
 epsilon = 0.1; %Choice of epsilon
-Tests = 1000; %Number of tests
+Tests = 100; %Number of tests
 
 ncounter = 0;
 n = N;
 ncounter = ncounter +1;
+set = zeros(1,n);
+Set = zeros(1,Tests);   
 for i = 0:9
-    ind = find(labels(:,1)==i);
+    ind = find(labels==i);
     ind = ind(randperm(length(ind)));
     set((n/10)*i+1:(n/10)*(i+1)) = ind(1:n/10); %Denotes the set of images taken for training data
 end
-Labels = labels;
-Labels(set,:) = [];
+Set1 = setdiff(1:size(data,2),set);
  for i = 0:9
-    ind = find(Labels(:,1)==i);
+    ind = find(labels(Set1)==i);
     ind = ind(randperm(length(ind)));
-    Set((Tests/10)*i+1:(Tests/10)*(i+1)) = ind(1:Tests/10); %Denotes the set of images not used in training data
-end
+    Set((Tests/10)*i+1:(Tests/10)*(i+1)) = Set1(ind(1:Tests/10)); %Denotes the set of images not used in training data
+ end
+Set = Set(randperm(length(Set)));
 
 X = images(:,set); %Loads corresponding images
 d = size(X,1); %Size of images (number of pixels) 
