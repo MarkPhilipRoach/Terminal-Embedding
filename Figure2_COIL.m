@@ -24,12 +24,17 @@ Tests = 1000; %Number of tests
 r = R;
 rcounter = 1;
 set = 1:r:7199; %Denotes the set of images taken for training data
+Set = zeros(1,Tests);
+Set1 = setdiff(1:7200,set);
 Labels = transpose(labels);
 Labels(set,:) = [];
  for i = 1:100
-     ind = setdiff(1:72,set((i-1)*(72/r)+1:i*(72/r)));
-    Set((i-1)*(Tests/100)+1:i*(Tests/100)) = ind(1:(Tests/100)); %Denotes the set of images not used in training data
-end
+    ind = Set1((i-1)*(72/r)+1:i*(72/r));
+    ind = ind(randperm(length(ind)));
+    Set((i-1)*(Tests/100)+1:i*(Tests/100)) = ind(1:(Tests/100)); %Denotes the set of images used in testing data
+ end
+ Set = Set(randperm(length(Set)));
+ 
 n = size(set,2); 
 X = images(:,set); %Loads corresponding images
 
@@ -121,8 +126,6 @@ Nonlinearity(s,1) = (norm(uembed - [Pi*u; 0],2)/norm([Pi*u; 0],2))*100;
 Nonlinearity(s,2) = (norm(uembed2 - [Pi*u; 0],2)/norm([Pi*u; 0],2))*100;
 Nonlinearity(s,3) = (norm(uembedL - [Pi*u; 0],2)/norm([Pi*u; 0],2))*100;
 end
-writematrix(SuccessRateTotal,'Folderpath\SuccessRateTotal.csv')
-writematrix(NonlinearityTotal,'Folderpath\NonlinearityTotal.csv')
 SuccessRateTotal(mcounter, 1) = (p/Tests)*(100);
 SuccessRateTotal(mcounter, 2) = (p2/Tests)*(100);
 SuccessRateTotal(mcounter, 3) = (pL/Tests)*(100);
