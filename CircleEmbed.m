@@ -64,7 +64,7 @@ subplot(4,3,p);
 % Create plot
 hold on
 plot3(X(1,:),X(2,:),X(3,:),'+','MarkerEdgeColor',[0.3010 0.7450 0.9330],'MarkerFaceColor', [0.3010 0.7450 0.9330],'MarkerSize', 0.8);
-plot3(uorg1(1,:),uorg1(2,:),uorg1(3,:),'o','MarkerEdgeColor',[0.9290 0.6940 0.1250],'MarkerSize', 5,'MarkerFaceColor', [0.9290 0.6940 0.1250]);
+plot3(uorg1(1,:),uorg1(2,:),uorg1(3,:),'o','MarkerEdgeColor',[0.9290 0.6940 0.1250],'MarkerSize', 2,'MarkerFaceColor', [0.9290 0.6940 0.1250]);
 hold off
 % Create xlabel
 xlabel({'x'});
